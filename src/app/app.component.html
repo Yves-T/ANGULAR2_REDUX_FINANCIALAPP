@@ -1,3 +1,8 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+    <app-new-operation (addOperation)="addOperation($event)"></app-new-operation>
+    <app-operation-list [operations]="operations | async"
+                        (deleteOperation)="deleteOperation($event)"
+                        (incrementOperation)="incrementOperation($event)"
+                        (decrementOperation)="decrementOperation($event)">
+    </app-operation-list>
+</div>
