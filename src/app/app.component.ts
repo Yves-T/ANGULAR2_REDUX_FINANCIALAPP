@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { Operation } from './common/operation.model';
-import {
-    ADD_OPERATION,
-    INCREMENT_OPERATION,
-    DECREMENT_OPERATION,
-    REMOVE_OPERATION
-} from './common/operations';
+import * as operations from '../app/actions/operations';
 import { Store } from '@ngrx/store';
 import { State } from './common/operations';
 import { Observable } from 'rxjs';
@@ -30,24 +25,22 @@ export class AppComponent {
     }
 
     addOperation(operation) {
-        this._store.dispatch({
-            type: ADD_OPERATION, payload: {
-                id: ++this.id,
-                reason: operation.reason,
-                amount: parseInt(operation.amount, 10)
-            }
-        });
+        this._store.dispatch(new operations.AddOperationAction({
+            id: ++this.id,
+            reason: operation.reason,
+            amount: parseInt(operation.amount, 10)
+        }));
     }
 
     incrementOperation(operation) {
-        this._store.dispatch({type: INCREMENT_OPERATION, payload: operation});
+        this._store.dispatch(new operations.IncrementOperationAction(operation));
     }
 
     decrementOperation(operation) {
-        this._store.dispatch({type: DECREMENT_OPERATION, payload: operation});
+        this._store.dispatch(new operations.DecrementOperationAction(operation));
     }
 
     deleteOperation(operation) {
-        this._store.dispatch({type: REMOVE_OPERATION, payload: operation});
+        this._store.dispatch(new operations.RemoveOperationAction(operation));
     }
 }

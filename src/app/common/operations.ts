@@ -1,11 +1,6 @@
-import { ActionReducer, Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Operation } from './operation.model';
-
-//definitions of the actions that alter the state
-export const ADD_OPERATION = 'Add an operation';
-export const REMOVE_OPERATION = 'Remove an operation';
-export const INCREMENT_OPERATION = 'Increment an operation';
-export const DECREMENT_OPERATION = 'Decrement an operation';
+import * as operations from '../actions/operations';
 
 export interface State {
     operations: Operation[];
@@ -18,14 +13,14 @@ const initialState: State = {
 
 function operationReducer(state = initialState, action: Action) {
     switch (action.type) {
-        case ADD_OPERATION: {
+        case operations.ActionTypes.ADD_OPERATION: {
             const operation: Operation = action.payload;
             return Object.assign({}, state, {
                 operations: [...state.operations, operation]
             });
         }
 
-        case INCREMENT_OPERATION: {
+        case operations.ActionTypes.INCREMENT_OPERATION: {
             const amount: number = ++action.payload.amount;
             return Object.assign({}, state, {
                     operations: state.operations.map(item => {
@@ -35,7 +30,7 @@ function operationReducer(state = initialState, action: Action) {
             );
         }
 
-        case DECREMENT_OPERATION: {
+        case operations.ActionTypes.DECREMENT_OPERATION: {
             const amount: number = --action.payload.amount;
             return Object.assign({}, state, {
                     operations: state.operations.map(item => {
@@ -45,7 +40,7 @@ function operationReducer(state = initialState, action: Action) {
             );
         }
 
-        case REMOVE_OPERATION:
+        case operations.ActionTypes.REMOVE_OPERATION:
             return Object.assign({}, state, {
                     operations: state.operations.filter(operation => {
                         return operation.id !== action.payload.id;

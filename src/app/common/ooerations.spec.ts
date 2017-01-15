@@ -2,15 +2,13 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import {
-    reducer as operationReducer,
-    ADD_OPERATION,
-    INCREMENT_OPERATION,
-    DECREMENT_OPERATION,
-    REMOVE_OPERATION
+    reducer as operationReducer
 } from './operations';
+
+import * as operations from '../actions/operations';
 import { expect } from 'chai';
 
-describe('Operation reducer', () => {
+describe('Operation reduce', () => {
     beforeEach(() => {
         // noop
     });
@@ -23,7 +21,7 @@ describe('Operation reducer', () => {
     it(`should add to operations'`, async(() => {
         // arrange
         const action = {
-            type: ADD_OPERATION,
+            type: operations.ActionTypes.ADD_OPERATION,
             payload: {id: 123, amount: 456, reason: 'some reason'}
         };
         const stateBefore = {operations: []};
@@ -44,7 +42,7 @@ describe('Operation reducer', () => {
     it('should increment operation', async(() => {
         // arrange
         const action = {
-            type: INCREMENT_OPERATION,
+            type: operations.ActionTypes.INCREMENT_OPERATION,
             payload: {id: 124, amount: 200, reason: 'second reason'}
         };
         const stateBefore = {
@@ -72,7 +70,7 @@ describe('Operation reducer', () => {
     it('should decrement operation', async(() => {
         // arrange
         const action = {
-            type: DECREMENT_OPERATION,
+            type: operations.ActionTypes.DECREMENT_OPERATION,
             payload: {id: 125, amount: 300, reason: 'third reason'}
         };
         const stateBefore = {
@@ -100,7 +98,7 @@ describe('Operation reducer', () => {
     it('should remove operation', async(() => {
         // arrange
         const action = {
-            type: REMOVE_OPERATION,
+            type: operations.ActionTypes.REMOVE_OPERATION,
             payload: {id: 124}
         };
         const stateBefore = {
