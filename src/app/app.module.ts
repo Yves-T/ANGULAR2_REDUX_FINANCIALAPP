@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
-import { reducer } from './common/operations';
+import { reducer } from './reducers/operations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { NewOperationComponent } from './new-operation/new-operation.component';

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Operation } from './common/operation.model';
 import * as operations from '../app/actions/operations';
 import { Store } from '@ngrx/store';
-import { State } from './common/operations';
+import { State } from './reducers/operations';
 import { Observable } from 'rxjs';
 
 @Component({

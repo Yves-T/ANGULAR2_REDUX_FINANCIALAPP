@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { State } from '../common/operations';
+import { State } from '../reducers/operations';
 
 @Component({
     selector: 'app-operation-list',
