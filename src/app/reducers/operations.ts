@@ -1,17 +1,19 @@
 import { Action } from '@ngrx/store';
 import { Operation } from '../common/operation.model';
 import * as operations from '../actions/operations';
+import { Observable } from 'rxjs';
+import '@ngrx/core/add/operator/select';
 
-export interface State {
-    operations: Operation[];
+export interface OperationState {
+    operations: Array<Operation>;
 }
 
 // initial state of the operations
-const initialState: State = {
+const initialState: OperationState = {
     operations: [],
 };
 
-function operationReducer(state = initialState, action: Action) {
+function operationReducer(state = initialState, action: Action): OperationState {
     switch (action.type) {
         case operations.ActionTypes.ADD_OPERATION: {
             const operation: Operation = action.payload;
@@ -51,3 +53,7 @@ function operationReducer(state = initialState, action: Action) {
 }
 
 export { operationReducer as reducer };
+
+export function getEntities() {
+    return (state$: Observable<OperationState>) => state$.select(s => s.operations);
+}

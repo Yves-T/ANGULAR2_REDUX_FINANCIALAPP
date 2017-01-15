@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Operation } from './common/operation.model';
 import * as operations from '../app/actions/operations';
 import { Store } from '@ngrx/store';
-import { State } from './reducers/operations';
 import { Observable } from 'rxjs';
+import { getEntities } from './reducers/index';
+import 'rxjs/add/operator/let';
 
 @Component({
     selector: 'app-root',
@@ -12,16 +13,16 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
     public id: number = 0;
-    public operations: Observable<Store<Operation>>;
+    public operations: Observable<Array<Operation>>;
 
     public formData = {
         reason: '',
         amount: ''
     };
 
-    constructor(private _store: Store<State>) {
+    constructor(private _store: Store<any>) {
         _store.select('allOperations').subscribe(console.log.bind(console));
-        this.operations = _store.select('allOperations');
+        this.operations = _store.let(getEntities());
     }
 
     addOperation(operation) {

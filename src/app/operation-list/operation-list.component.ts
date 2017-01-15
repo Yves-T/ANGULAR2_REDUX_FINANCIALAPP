@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { State } from '../reducers/operations';
+import { Operation } from '../common/operation.model';
 
 @Component({
     selector: 'app-operation-list',
@@ -8,7 +8,7 @@ import { State } from '../reducers/operations';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OperationListComponent {
-    @Input() operations: State;
+    @Input() operations: Array<Operation>;
 
     constructor() {
         // noop

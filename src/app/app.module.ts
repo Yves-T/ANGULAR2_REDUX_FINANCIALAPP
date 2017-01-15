@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
-import { reducer } from './reducers/operations';
+import { reducer } from './reducers/index';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { NewOperationComponent } from './new-operation/new-operation.component';
@@ -21,7 +21,7 @@ import { OperationListComponent } from './operation-list/operation-list.componen
         BrowserModule,
         FormsModule,
         HttpModule,
-        StoreModule.provideStore({allOperations: reducer}),
+        StoreModule.provideStore(reducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
     ],
     providers: [],
