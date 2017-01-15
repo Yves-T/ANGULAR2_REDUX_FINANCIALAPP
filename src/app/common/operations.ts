@@ -15,38 +15,35 @@ function operationReducer(state = initialState, action: Action) {
     switch (action.type) {
         case operations.ActionTypes.ADD_OPERATION: {
             const operation: Operation = action.payload;
-            return Object.assign({}, state, {
+            return {
                 operations: [...state.operations, operation]
-            });
+            };
         }
 
         case operations.ActionTypes.INCREMENT_OPERATION: {
             const amount: number = ++action.payload.amount;
-            return Object.assign({}, state, {
-                    operations: state.operations.map(item => {
-                        return item.id === action.payload.id ? Object.assign({}, item, {amount}) : item;
-                    })
-                }
-            );
+            return {
+                operations: state.operations.map(item => {
+                    return item.id === action.payload.id ? Object.assign({}, item, {amount}) : item;
+                })
+            };
         }
 
         case operations.ActionTypes.DECREMENT_OPERATION: {
             const amount: number = --action.payload.amount;
-            return Object.assign({}, state, {
-                    operations: state.operations.map(item => {
-                        return item.id === action.payload.id ? Object.assign({}, item, {amount}) : item;
-                    })
-                }
-            );
+            return {
+                operations: state.operations.map(item => {
+                    return item.id === action.payload.id ? Object.assign({}, item, {amount}) : item;
+                })
+            }
         }
 
         case operations.ActionTypes.REMOVE_OPERATION:
-            return Object.assign({}, state, {
-                    operations: state.operations.filter(operation => {
-                        return operation.id !== action.payload.id;
-                    })
-                }
-            );
+            return {
+                operations: state.operations.filter(operation => {
+                    return operation.id !== action.payload.id;
+                })
+            };
 
         default:
             return state;
