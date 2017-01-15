@@ -27,6 +27,7 @@
     "@types/chai": "^3.4.34",
     "@types/deep-freeze": "0.0.29",
     "@types/sinon": "^1.16.34",
+    "bootstrap": "^4.0.0-alpha.6",
     "chai": "^3.5.0",
     "core-js": "^2.4.1",
     "deep-freeze": "0.0.1",
