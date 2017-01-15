@@ -11,7 +11,8 @@ module.exports = function (config) {
             require('karma-remap-istanbul'),
             require('angular-cli/plugins/karma'),
             require('karma-phantomjs-launcher'),
-            require('karma-mocha-reporter')
+            require('karma-mocha-reporter'),
+            require('karma-nyan-reporter')
         ],
         files: [
             {pattern: './src/test.ts', watched: false}
@@ -33,8 +34,8 @@ module.exports = function (config) {
             environment: 'dev'
         },
         reporters: config.angularCli && config.angularCli.codeCoverage
-            ? ['mocha', 'karma-remap-istanbul']
-            : ['mocha'],
+            ? ['nyan', 'karma-remap-istanbul']
+            : ['nyan'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
