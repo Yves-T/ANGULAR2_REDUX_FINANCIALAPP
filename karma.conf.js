@@ -64,6 +64,10 @@ module.exports = function (config) {
         mochaReporter: {
             output: 'minimal',
             showDiff: 'inline'
+        },
+
+        nyanReporter: {
+            suppressErrorHighlighting: true
         }
     });
 };
