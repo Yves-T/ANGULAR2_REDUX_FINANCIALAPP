@@ -10,12 +10,20 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { NewOperationComponent } from './new-operation/new-operation.component';
 import { OperationListComponent } from './operation-list/operation-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CurrenciesComponent } from './currencies/currencies.component';
+import { CurrenciesService } from './services/currencies.service';
+import { CurrencyEffects } from './effects/currencies';
+import { EffectsModule } from '@ngrx/effects';
+import { CustomCurrencyPipe } from './currency.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         NewOperationComponent,
-        OperationListComponent
+        OperationListComponent,
+        CurrenciesComponent,
+        CustomCurrencyPipe
     ],
     imports: [
         BrowserModule,
@@ -23,8 +31,10 @@ import { OperationListComponent } from './operation-list/operation-list.componen
         HttpModule,
         StoreModule.provideStore(reducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
+        NgbModule.forRoot(),
+        EffectsModule.run(CurrencyEffects),
     ],
-    providers: [],
+    providers: [CurrenciesService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

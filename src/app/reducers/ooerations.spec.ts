@@ -3,7 +3,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import {
     reducer as operationReducer
-} from '../reducers/operations';
+} from './operations';
 
 import * as operations from '../actions/operations';
 import { expect } from 'chai';

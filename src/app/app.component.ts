@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { Operation } from './common/operation.model';
 import * as operations from '../app/actions/operations';
+import * as currencies from '../app/actions/currencies';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getEntities } from './reducers/index';
+import {
+    getEntities,
+    getSelectedCurrency,
+    getCurrencyEntities
+} from './reducers/index';
 import 'rxjs/add/operator/let';
 
 @Component({
@@ -14,6 +19,8 @@ import 'rxjs/add/operator/let';
 export class AppComponent {
     public id: number = 0;
     public operations: Observable<Array<Operation>>;
+    public currencies: Observable<string[]>;
+    public selectedCurrency: Observable<string>;
 
     public formData = {
         reason: '',
@@ -21,8 +28,14 @@ export class AppComponent {
     };
 
     constructor(private _store: Store<any>) {
-        _store.select('allOperations').subscribe(console.log.bind(console));
         this.operations = _store.let(getEntities());
+        this.currencies = _store.let(getCurrencyEntities());
+        this.selectedCurrency = _store.let(getSelectedCurrency());
+
+        this.operations.subscribe(console.log.bind(console));
+        this.currencies.subscribe(console.log.bind(console));
+
+        _store.dispatch( new currencies.LoadCurrencyRatesAction(''))
     }
 
     addOperation(operation) {
@@ -43,5 +56,10 @@ export class AppComponent {
 
     deleteOperation(operation) {
         this._store.dispatch(new operations.RemoveOperationAction(operation));
+    }
+
+    onCurrencySelected(currency: string) {
+        console.log(currency);
+        this._store.dispatch(new currencies.ChangeCurrencyAction(currency));
     }
 }

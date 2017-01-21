@@ -9,6 +9,7 @@ import { Operation } from '../common/operation.model';
 })
 export class OperationListComponent {
     @Input() operations: Array<Operation>;
+    @Input() selectedCurrency: any;
 
     constructor() {
         // noop
